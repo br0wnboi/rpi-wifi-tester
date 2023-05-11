@@ -34,7 +34,7 @@ def config():
         except Exception as error:
             print(error)
             result = False
-    return render_template("config.html", context={"result": result})
+    return render_template("config.html", result= result)
 
 
 @app.route("/status")
