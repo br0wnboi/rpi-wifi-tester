@@ -44,13 +44,6 @@ def status():
     adapter_status = "Monitor mode"
     return render_template("status.html", adapter_status=adapter_status)
 
-<<<<<<< HEAD
-
-@app.route("/attack")
-def attack():
-    # Logic for the attack page
-    return render_template("attack.html")
-=======
 @app.route('/attack', methods=['GET', 'POST'])
 def attack():
     # Deauthentication attack logic
@@ -68,7 +61,6 @@ def attack():
             output = e.output
             result = "Failed to execute deauthentication attack"
 
->>>>>>> d5021714166687856a0539cf81ffc19d889c35f9
 
 
 if __name__ == "__main__":
