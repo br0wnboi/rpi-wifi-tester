@@ -11,7 +11,7 @@ def index():
 
 @app.route("/config", methods=["GET", "POST"])
 def config():
-    result = False
+    result = "Monitor mode not selected."
     if request.method == "POST":
         mode = request.form.get("mode")
         command = []
@@ -30,10 +30,10 @@ def config():
 
         try:
             subprocess.run(command, check=True)
-            result = True
+            result = "Device set to Monitor mode"
         except Exception as error:
             print(error)
-            result = False
+            result = "Error configuring Monitor mode"
     return render_template("config.html", result= result)
 
 
