@@ -19,13 +19,13 @@ def config():
             command = [
                 "airmon-ng",
                 "start",
-                "wlan0",
+                "wlan1",
             ]  # Replace 'wlan0' with your wireless adapter name
         elif mode == "managed":
             command = [
                 "airmon-ng",
                 "stop",
-                "wlan0",
+                "wlan1",
             ]  # Replace 'wlan0' with your wireless adapter name
         else:
             return render_template("config.html", result="wrong mode")
