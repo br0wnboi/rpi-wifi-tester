@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wireless Config</title>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/config">Config</a></li>
+      <li><a href="/status">Status</a></li>
+      <li><a href="/attack">Attack</a></li>
+    </ul>
+  </nav>
+  <h1>Wireless Config</h1>
+  <form method="POST" action="/config">
+    <label for="mode">Select Mode:</label>
+    <select name="mode" id="mode">
+      <option value="monitor">Monitor Mode</option>
+      <option value="managed">Managed Mode</option>
+    </select>
+    <br>
+    <input type="submit" value="Apply">
+  </form>
+  <br>
+  <p>{{ result }}</p>
+</body>
+</html>
