@@ -11,7 +11,7 @@ def index():
 
 @app.route("/config", methods=["GET", "POST"])
 def config():
-    result = "Monitor mode not selected."
+    result = ""
     if request.method == "POST":
         mode = request.form.get("mode")
         command = []
@@ -27,13 +27,15 @@ def config():
                 "stop",
                 "wlan0",
             ]  # Replace 'wlan0' with your wireless adapter name
-
+        else:
+            return render_template("config.html", result="wrong mode")
+        result =  mode.capitalize()
         try:
             subprocess.run(command, check=True)
-            result = "Device set to Monitor mode"
+            result = f"Device set to {result} mode"
         except Exception as error:
             print(error)
-            result = "Error configuring Monitor mode"
+            result = f"Error configuring {result} mode"
     return render_template("config.html", result= result)
 
 
