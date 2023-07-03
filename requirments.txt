@@ -1,0 +1,9 @@
+Flask
+Jinja2
+Werkzeug
+MarkupSafe
+click
+itsdangerous
+pyshark
+python-socketio
+flask-socketio

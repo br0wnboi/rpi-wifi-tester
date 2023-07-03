@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f5f5f5;
+        }
+
+        h1 {
+          text-align: center;
+          color: #333;
+          padding: 20px 0;
+        }
+
+        nav {
+          background-color: #333;
+          overflow: hidden;
+        }
+
+        nav a {
+          float: left;
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+          background-color: #555;
+        }
+
+        nav a.active {
+          background-color: #4CAF50;
+        }
+
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid black;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+          text-align: center;
+          margin-top: 20px;
+        }
+
+        input[type="submit"] {
+          padding: 10px 20px;
+          font-size: 16px;
+          background-color: #4CAF50;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+          background-color: #45a049;
+        }
+
+        #csv-content {
+          display: none;
+        }
+    </style>
+</head>
+<body>
+<h1>WiFi Testing Interface</h1>
+
+<nav>
+  <a href="/">Home</a>
+  <a href="/live">Live</a>
+  <a href="/config">Config</a>
+  <a href="/status">Status</a>
+  <a href="/attack">Attack</a>
+  <a class="active" href="/dump">Dump</a>
+</nav>
+
+<title>AiroDump Output</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function showCSV() {
+        $.ajax({
+            url: '/show_csv',
+            type: 'GET',
+            success: function(response) {
+                var csvContent = '';
+                for (var i = 0; i < response.length; i++) {
+                    csvContent += '<tr>';
+                    for (var j = 0; j < response[i].length; j++) {
+                        csvContent += '<td>' + response[i][j] + '</td>';
+                    }
+                    csvContent += '</tr>';
+                }
+                $('#csv-table').html(csvContent);
+                $('#csv-content').show();
+            }
+        });
+    }
+</script>
+</head>
+<body>
+    <h1>Airodump-ng Interface</h1>
+    <h3>Please wait for atleast 30 seconds for the scan to complete</h3>
+    <form action="/dump" method="post">
+        <input type="submit" value="Run Airodump-ng">
+    </form>
+    
+    {% if message %}
+    <p>{{ message }}</p>
+    {% endif %}
+    {% if csv_data %}
+        {% if show_csv_button %}
+            <button onclick="showCSV()">Show CSV File</button>
+        {% endif %}
+        <div id="csv-content" {% if not show_csv_button %}style="display: block;"{% endif %}>
+            <h2>CSV Content</h2>
+            <table id="csv-table">
+                {% for row in csv_data %}
+                    <tr>
+                        {% for cell in row %}
+                            <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% endif %}
+</body>
+</html>

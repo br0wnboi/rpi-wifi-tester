@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>berryst0ne</title>
+  <title>WiFi Testing Interface</title>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      padding: 20px 0;
+    }
+
     nav {
       background-color: #333;
       overflow: hidden;
     }
+
     nav a {
       float: left;
       display: block;
@@ -14,26 +28,52 @@
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;
+      transition: background-color 0.3s;
     }
+
     nav a:hover {
-      background-color: #ddd;
-      color: black;
+      background-color: #555;
     }
+
     nav a.active {
       background-color: #4CAF50;
-      color: white;
+    }
+
+    h2 {
+      color: #333;
+      margin-top: 40px;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    pre {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border: 1px solid #ddd;
+      overflow-x: auto;
+      font-family: Consolas, monospace;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to berryst0ne</h1>
+  <h1>WiFi Testing Interface</h1>
 
   <nav>
     <a class="active" href="/">Home</a>
+    <a href="/live">Live</a>
     <a href="/config">Config</a>
     <a href="/status">Status</a>
     <a href="/attack">Attack</a>
+    <a href="/dump">Dump</a>
   </nav>
+
+  <h2>About</h2>
+  <p>Introducing the Raspberry Pi Network Security Testing Device, a compact tool for cybersecurity professionals. Its modules include attack simulations, configuration options, real-time packet capturing, and comprehensive reporting. Monitor network activity, generate visualizations, and seamlessly integrate with existing security frameworks. Enhance your network defenses with this versatile, affordable solution.</p>
+
+  <h2>System Information</h2>
+  <pre>{{ system_info }}</pre>
 </body>
 </html>
-
